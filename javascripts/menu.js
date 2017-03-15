@@ -1,0 +1,13 @@
+$(document).ready(function(){
+    try{
+        $("ul.sub-menu").parent().mouseover(
+            function(){
+                $(this).children('ul.sub-menu').show();
+            }
+        ).mouseout(
+            function(){
+                $(this).children('ul.sub-menu').hide();
+        });
+    }catch(e){
+    }
+});
