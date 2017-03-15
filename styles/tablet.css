@@ -1,0 +1,36 @@
+div.nav-holder{
+    padding: 5%;
+}
+.stimg label a{
+    color: white;
+    display: inline-block;
+    font-size: 1.5em;
+    font-weight: normal;
+    margin-top: 5%;
+}
+div#footer{
+    display: none;
+}
+
+
+h3.nav-header {
+    background-color: #ffa500;
+    color: #ffffff;
+    font-size: 1.5em;
+    margin: 0;
+    padding: 3%;
+}
+div.module{
+    float: left;
+    margin-bottom: 5%;
+    text-align: center;
+    width: 20%;
+}
+div.module a img{
+    width: 128px;
+}
+div.module a label{
+    color: white;
+    font-size: 1.5em;
+    margin-top: 3%;
+}

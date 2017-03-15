@@ -1,0 +1,87 @@
+.left-nav, .content{
+    float: left;
+    margin-right: 20px;
+    padding: 10px 0;
+}
+.left-nav{
+    border: 1px solid lightgray;
+}
+.content{
+    width: 78%;    
+}
+#main{
+    padding: 20px 0;
+}
+.section{
+    margin-bottom: 15px;
+}
+.section-title{
+    color: #542B27;
+    font-size: 14px;
+    font-weight: bold;    
+}
+.section ul{
+    list-style: none outside none;
+    padding: 0;    
+}
+.section ul li{
+    line-height: 24px;
+}
+.section ul li:hover{
+    background-color: #e7f1f2;
+}
+.section ul li a{
+    text-decoration: none;
+}
+.section-title, .section ul li{
+    padding: 0 10px;
+}
+ul.project-basc-info{
+    padding: 10px;
+}
+ul.project-basc-info li{
+    list-style: none outside none; 
+}
+ul.project-basc-info li label{
+    display: inline-block;
+    font-weight: bold;
+    padding-right: 20px;    
+}
+ul.lead li label{
+    font-weight: normal;
+}
+.project-basc-info-basic, .project-general-contractors, .project-consulting-engineers, .project-architects, .project-sub-contractors{
+    border-bottom: 1px solid lightgray;
+    margin-bottom: 10px;    
+}
+#tab-1, #tab-2{
+    padding: 15px;
+}
+.item-short{
+    float: left;
+    width: 200px;
+}
+.item-short label{
+    display: block;
+}
+#user-edit-form label{
+    display: inline-block;
+    font-weight: bold;
+    width: 60px;    
+}
+#user-edit-form input{
+    margin-bottom: 10px;
+    margin-right: 10px;    
+}
+.section2{
+    
+}
+.section2 ul{
+    padding: 0;
+}
+.section2 ul li{
+    float: left;
+    font-weight: bold;
+    list-style: none outside none;
+    margin-right: 20px;    
+}
