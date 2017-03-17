@@ -147,7 +147,7 @@ class CI_Email {
 	 *
 	 * @var	string
 	 */
-	public $charset		= 'UTF-8';
+	public $charset		= 'utf-8';
 
 	/**
 	 * Alternative message (for HTML messages only)
@@ -161,7 +161,7 @@ class CI_Email {
 	 *
 	 * @var	bool
 	 */
-	public $validate	= FALSE;
+	public $validate	= TRUE;
 
 	/**
 	 * X-Priority header value.
@@ -224,13 +224,6 @@ class CI_Email {
 	public $bcc_batch_size	= 200;
 
 	// --------------------------------------------------------------------
-
-	/**
-	 * Whether PHP is running in safe mode. Initialized by the class constructor.
-	 *
-	 * @var	bool
-	 */
-	protected $_safe_mode		= FALSE;
 
 	/**
 	 * Subject header
@@ -395,7 +388,6 @@ class CI_Email {
 	{
 		$this->charset = config_item('charset');
 		$this->initialize($config);
-		$this->_safe_mode = ( ! is_php('5.4') && ini_get('safe_mode'));
 
 		isset(self::$func_override) OR self::$func_override = (extension_loaded('mbstring') && ini_get('mbstring.func_override'));
 
@@ -675,18 +667,6 @@ class CI_Email {
 	public function message($body)
 	{
 		$this->_body = rtrim(str_replace("\r", '', $body));
-
-		/* strip slashes only if magic quotes is ON
-		   if we do it with magic quotes OFF, it strips real, user-inputted chars.
-
-		   NOTE: In PHP 5.4 get_magic_quotes_gpc() will always return 0 and
-			 it will probably not exist in future versions at all.
-		*/
-		if ( ! is_php('5.4') && get_magic_quotes_gpc())
-		{
-			$this->_body = stripslashes($this->_body);
-		}
-
 		return $this;
 	}
 
@@ -1885,16 +1865,14 @@ class CI_Email {
 		// so this needs to be assigned to a variable
 		$from = $this->clean_email($this->_headers['Return-Path']);
 
-		if ($this->_safe_mode === TRUE || ! $this->_validate_email_for_shell($from))
+		if ( ! $this->_validate_email_for_shell($from))
 		{
 			return mail($this->_recipients, $this->_subject, $this->_finalbody, $this->_header_str);
 		}
-		else
-		{
-			// most documentation of sendmail using the "-f" flag lacks a space after it, however
-			// we've encountered servers that seem to require it to be in place.
-			return mail($this->_recipients, $this->_subject, $this->_finalbody, $this->_header_str, '-f '.$from);
-		}
+
+		// most documentation of sendmail using the "-f" flag lacks a space after it, however
+		// we've encountered servers that seem to require it to be in place.
+		return mail($this->_recipients, $this->_subject, $this->_finalbody, $this->_header_str, '-f '.$from);
 	}
 
 	// --------------------------------------------------------------------
@@ -2461,9 +2439,6 @@ class CI_Email {
 	{
 		if (self::$func_override)
 		{
-			// mb_substr($str, $start, null, '8bit') returns an empty
-			// string on PHP 5.3
-			isset($length) OR $length = ($start >= 0 ? self::strlen($str) - $start : -$start);
 			return mb_substr($str, $start, $length, '8bit');
 		}
 
